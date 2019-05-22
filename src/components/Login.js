@@ -1,6 +1,7 @@
 import React, {
   Component
 } from 'react';
+import Loader from "../img/IndianFlagLoader.gif";
 import './../css/login.css';
 //import * as moment from "moment";
 import $ from 'jquery';
@@ -27,9 +28,11 @@ class Login extends Component {
     this.dataEncryption = this.dataEncryption.bind(this, '');
   }
   componentDidMount() {
-    this.setState({
-      isLoader: false
-    });
+    setTimeout(() => {
+      this.setState({
+        isLoader: false
+      });
+    }, 1000);
   }
 
   /*Data Encryption*/
@@ -80,7 +83,7 @@ class Login extends Component {
       sessionStorage.setItem('userData', JSON.stringify(result.result[0]));
       setTimeout(()=>{
         this.props.history.push('/Dashboard');
-      }, 3000);
+      }, 1000);
     } else {
       var msgObj = this.state.errorMsgObj;
       msgObj.alertIs = true;
@@ -93,7 +96,7 @@ class Login extends Component {
           errorMsgObj: msgObj,
           isLoader: false
         });
-      }, 3000);
+      }, 1000);
     }
   }
 
@@ -128,7 +131,7 @@ class Login extends Component {
     return (
     <div className="login-main-cont">
       <div className={this.state.isLoader ? 'mainLoader show' : 'mainLoader'}>
-        <img src="https://i2.wp.com/swaggyimages.com/wp-content/uploads/2018/05/Indian-Flag-Pics-Free-Download.gif?w=640" alt="Loader" />
+        <img src={Loader} alt="Loader" />
       </div>
       <div className="login-main-box">
         <h2><span>Cre</span><span>dent</span><span>ials</span></h2>

@@ -143,6 +143,8 @@ header h2 {
 
 .voting-place {
   color: #ffffff;
+  display: flex;
+  justify-content: space-between;
   width: 88%;
   margin: 15px auto 5px;
   font-size: 18px;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-//import logo from "../img/logo.png";
+import Loader from "../img/IndianFlagLoader.gif";
 //import * as moment from "moment";
 import $ from 'jquery';
 import Popper from 'popper.js';
@@ -11,7 +11,7 @@ class Dashboard extends Component {
   constructor(props){
     super(props);
     this.state = {
-      rootURL:"http://192.168.1.201:1987/apiCtrl/",
+      rootURL:"http://192.168.1.98:1987/apiCtrl/",
       resData: [],
       userData: {},
       getFirstObj: {},
@@ -40,17 +40,19 @@ class Dashboard extends Component {
         var element = resultData[i];
         element.activeClassIs = false;
       }
-      this.setState({
-        isLoader: false,
-        resData: resultData,
-        getFirstObj: result.result[0]
-      });
+      setTimeout(() => {
+        this.setState({
+          isLoader: false,
+          resData: resultData,
+          getFirstObj: result.result[0]
+        });
+      }, 1000);
     },(error) => {
         var msgObj = this.state.errorMsgObj;
         msgObj.alertIs = true;
         msgObj.alertMsg = "Something went wrong...";
         msgObj.alertTitle = "Error";
-        msgObj.alertClass = "error-msg";
+        msgObj.alertClass = "danger-msg";
         this.setState({
           errorMsgObj: msgObj,
           isLoader: false
@@ -131,26 +133,29 @@ class Dashboard extends Component {
   render(){
     return (
       <div className="dashboard-cont">
+        <div className={this.state.isLoader ? 'mainLoader show' : 'mainLoader'}>
+          <img src={Loader} alt="Loader" />
+        </div>
         <Header />
-        <div className="votingportal">
+        <div className="votingportal" style={{'display': this.state.resData.length > 0 ? 'block' : 'none'}}>
           <div className="main-box">
-            <div className="voting-place">Place: <strong>{this.state.getFirstObj.city || '--'}</strong></div>
+            <div className="voting-place"><span>Place: <strong>{this.state.getFirstObj.city || '--'}</strong></span> <span>Election for <strong>MLA</strong> posting</span></div>
             <div className="innerbox">
-            {this.state.resData.map((item, index) => (
-                <div className="member1" key={index}>
-                    <div className="icon">
-                        <img src={item.party_symbol} alt="Symbol" />
-                    </div>
-                    <div className="partie">
-                        <h5>{item.first_name + ' ' +item.last_name}</h5>
-                        <p className="party-person">{item.full_name}</p>
-                    </div>
-                    <div className="voting">
-                        <button type="button" onClick={this.SubmitVote.bind(this, item, index)} className={item.activeClassIs ? 'btn btn-success btn-sm active':'btn btn-success btn-sm'}>{item.activeClassIs ? 'VOTED':'VOTE'}</button>
-                    </div>
-                </div>
-            ))}
-          </div>
+              {this.state.resData.map((item, index) => (
+                  <div className="member1" key={index}>
+                      <div className="icon">
+                          <img src={item.party_symbol} alt="Symbol" />
+                      </div>
+                      <div className="partie">
+                          <h5>{item.first_name + ' ' +item.last_name}</h5>
+                          <p className="party-person">{item.full_name}</p>
+                      </div>
+                      <div className="voting">
+                          <button type="button" onClick={this.SubmitVote.bind(this, item, index)} className={item.activeClassIs ? 'btn btn-success btn-sm active':'btn btn-success btn-sm'}>{item.activeClassIs ? 'VOTED':'VOTE'}</button>
+                      </div>
+                  </div>
+              ))}
+            </div>
           </div>
         </div>
         <div className="modal fade voted-success-modal" id="votedSuccessModal" tabIndex="-1" role="dialog" aria-labelledby="successModal"
