@@ -1,6 +1,6 @@
 .login-main-cont {
-    animation: bgChangingAni 5s ease-in-out infinite;
-    background-image: url(../img/Flag_of_India.svg);
+    animation: bgChangingAni 10s ease-in-out infinite;
+    background-image: url(../img/goldenTemple.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -13,8 +13,7 @@
 
 @keyframes bgChangingAni {
 
-    0%,
-    100% {
+    0% {
         background-image: url(../img/goldenTemple.jpg);
     }
 
@@ -28,6 +27,10 @@
 
     75% {
         background-image: url(../img/redFortDelhi.jpg);
+    }
+
+    100% {
+        background-image: url(../img/goldenTemple.jpg);
     }
 }
 
@@ -98,87 +101,6 @@
 
 .btn-success {
     background-color: #118808;
-}
-
-/* Toaster Msg css open */
-.toaster-bg {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 1000;
-}
-
-.toaster-bg.showToast {
-    display: block;
-}
-
-.toast.cstm-toaster {
-    background-color: #fff;
-    border-width: 3px;
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.8);
-    color: #6c757d;
-    position: fixed;
-    left: 50%;
-    top: 0;
-    transform: translate(-50%, -100%);
-    -webkit-transform: translate(-50%, -100%);
-    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-    min-width: 300px;
-    z-index: 1001;
-}
-
-.toast.cstm-toaster.showToast {
-    transform: translate(-50%, 0);
-    -webkit-transform: translate(-50%, 0);
-    top: 100px;
-    opacity: 1;
-}
-
-.cstm-toaster .toast-header {
-    justify-content: space-between;
-}
-
-.cstm-toaster button.close {
-    font-size: 16px;
-    float: none;
-    height: 25px;
-    width: 25px;
-    text-align: center;
-    line-height: 25px;
-    margin-right: -8px;
-}
-
-.cstm-toaster .toast-body {
-    padding: 15px;
-    font-size: 18px;
-    text-align: center;
-}
-
-.toast.cstm-toaster.danger-msg {
-    border-color: #dc3545;
-}
-
-.cstm-toaster.danger-msg .toast-header {
-    color: #dc3545;
-}
-
-.toast.cstm-toaster.warning-msg {
-    border-color: #ffc107;
-}
-
-.cstm-toaster.warning-msg .toast-header {
-    color: #ffc107;
-}
-
-.toast.cstm-toaster.success-msg {
-    border-color: #28a745;
-}
-
-.cstm-toaster.success-msg .toast-header {
-    color: #28a745;
 }
 
 @media (max-width: 768px) {

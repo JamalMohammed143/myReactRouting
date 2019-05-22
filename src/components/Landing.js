@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import logo from "../img/logo.png";
+//import logo from "../img/logo.png";
 //import * as moment from "moment";
 import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import Header from '../components/Header';
 
 class Landing extends Component {
   constructor(props){
@@ -25,20 +26,8 @@ class Landing extends Component {
   render(){
     return (
       <div className="dashboard-cont">
-        <header>
-          <a href="/">
-            <img src={logo} alt="LOGO" />
-            <h2>Online Voting Portal</h2>
-          </a>
-          <div className="user-details" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span className="user-name">{this.state.userData.first_name + " " + this.state.userData.last_name}</span>
-            <span className="user-icon"><i className="fas fa-user"></i></span>
-          </div>
-          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a className="dropdown-item" href="/">Logout</a>
-          </div>
-        </header>
-        <div className="main-section text-center p-3">
+        <Header />
+        <div className="main-section">
           <h1>Landing Page Working In Progress...</h1>
         </div>
       </div>

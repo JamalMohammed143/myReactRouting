@@ -35,10 +35,26 @@ input[type="number"] {
 
 /* Dashboard css open */
 .dashboard-cont {
+  background-image: url(../img/Flag_of_India.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.dashboard-cont::before {
+  background-color: rgba(0, 0, 0, 0.6);
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
 }
 
 .btn-success:not(:disabled):not(.disabled).active {
@@ -48,7 +64,7 @@ input[type="number"] {
 }
 
 header {
-  background: #1d3e5d;
+  background: #161661;
   display: flex;
   box-shadow: 0px 0px 4px 1px grey;
   color: white;
@@ -116,22 +132,44 @@ header h2 {
 .votingportal {
   width: 100%;
   overflow: auto;
-  max-height: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.main-box {
+  position: relative;
+  z-index: 1;
 }
 
 .voting-place {
-  color: darkgray;
+  color: #ffffff;
   width: 88%;
   margin: 15px auto 5px;
   font-size: 18px;
 }
 
 .innerbox {
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 12px;
   width: 90%;
   margin: 0 auto 15px;
-  border: 1px solid gray;
-  border-radius: 3px;
-  box-shadow: 0px 0px 3px 2px gainsboro;
+  overflow: hidden;
+}
+
+.innerbox::before {
+  background-image: url(https://cdn.countryflags.com/thumbs/india/flag-heart-3d-250.png);
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 227px;
+  top: 50%;
+  left: 50%;
+  opacity: 0.5;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  z-index: 0;
 }
 
 .member1 {
@@ -139,7 +177,11 @@ header h2 {
   padding-left: 75px;
   padding-right: 80px;
   position: relative;
-  margin: 10px;
+  margin-bottom: 10px;
+}
+
+.member1:last-child {
+  margin-bottom: 0;
 }
 
 .member1 .icon {
@@ -175,6 +217,7 @@ header h2 {
 }
 
 .party-person {
+  color: #9c9c9c;
   margin: 0;
   padding-top: 2px;
   font-size: 12px;
@@ -239,6 +282,98 @@ header h2 {
 }
 
 /* -----------------End Success Modal--------- */
+
+/* Toaster Msg css open */
+.toaster-bg {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.toaster-bg.showToast {
+  display: block;
+}
+
+.toast.cstm-toaster {
+  background-color: #fff;
+  border-width: 3px;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.8);
+  color: #6c757d;
+  position: fixed;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -100%);
+  -webkit-transform: translate(-50%, -100%);
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  min-width: 300px;
+  z-index: 1001;
+}
+
+.toast.cstm-toaster.showToast {
+  transform: translate(-50%, 0);
+  -webkit-transform: translate(-50%, 0);
+  top: 100px;
+  opacity: 1;
+}
+
+.cstm-toaster .toast-header {
+  justify-content: space-between;
+}
+
+.cstm-toaster button.close {
+  font-size: 16px;
+  float: none;
+  height: 25px;
+  width: 25px;
+  text-align: center;
+  line-height: 25px;
+  margin-right: -8px;
+}
+
+.cstm-toaster .toast-body {
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.toast.cstm-toaster.danger-msg {
+  border-color: #dc3545;
+}
+
+.cstm-toaster.danger-msg .toast-header {
+  color: #dc3545;
+}
+
+.toast.cstm-toaster.warning-msg {
+  border-color: #ffc107;
+}
+
+.cstm-toaster.warning-msg .toast-header {
+  color: #ffc107;
+}
+
+.toast.cstm-toaster.success-msg {
+  border-color: #28a745;
+}
+
+.cstm-toaster.success-msg .toast-header {
+  color: #28a745;
+}
+
+/* Toaster Msg css close */
+
+.main-section {
+  color: white;
+  text-align: center;
+  padding: 15px;
+  position: relative;
+  z-index: 1;
+}
 
 @media (max-width: 768px) {
   header {

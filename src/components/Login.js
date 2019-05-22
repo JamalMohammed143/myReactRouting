@@ -6,13 +6,14 @@ import './../css/login.css';
 import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import ToasterBox from './ToasterBox';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rootURL: "http://192.168.1.201:1987/apiCtrl/",
-      isLoaded: true,
+      rootURL: "http://192.168.1.98:1987/apiCtrl/",
+      isLoader: true,
       aadharno: "",
       voterid: "",
       errorMsgObj: {
@@ -26,7 +27,9 @@ class Login extends Component {
     this.dataEncryption = this.dataEncryption.bind(this, '');
   }
   componentDidMount() {
-
+    this.setState({
+      isLoader: false
+    });
   }
 
   /*Data Encryption*/
@@ -47,6 +50,9 @@ class Login extends Component {
   }
 
   async submitCalling(e, params) {
+    this.setState({
+      isLoader: true
+    });
     var data = params;
     var sendData = 'application/json.utf_' + data.adhaar_no + '/' + data.voter_id;
     var url = this.state.rootURL + "validateUser";
@@ -61,7 +67,6 @@ class Login extends Component {
       //body: JSON.stringify(data)
     });
     var result = await reponse.json();
-    console.log('result', result);
     if(result.success) {
       var msgObj = this.state.errorMsgObj;
       msgObj.alertIs = true;
@@ -69,21 +74,26 @@ class Login extends Component {
       msgObj.alertTitle = "Success";
       msgObj.alertClass = "success-msg";
       this.setState({
-        errorMsgObj: msgObj
+        errorMsgObj: msgObj,
+        isLoader: false
       });
       sessionStorage.setItem('userData', JSON.stringify(result.result[0]));
-      //setTimeout(function(){
+      setTimeout(()=>{
         this.props.history.push('/Dashboard');
-      //}, 3000);
+      }, 3000);
     } else {
       var msgObj = this.state.errorMsgObj;
       msgObj.alertIs = true;
       msgObj.alertMsg = result.msg;
       msgObj.alertTitle = "Warning";
       msgObj.alertClass = "warning-msg";
-      this.setState({
-        errorMsgObj: msgObj
-      });
+      
+      setTimeout(()=>{
+        this.setState({
+          errorMsgObj: msgObj,
+          isLoader: false
+        });
+      }, 3000);
     }
   }
 
@@ -103,7 +113,6 @@ class Login extends Component {
       this.setState({
         errorMsgObj: msgObj
       });
-      console.log(this.state.errorMsgObj);
     }
     e.preventDefault();
   }
@@ -115,24 +124,14 @@ class Login extends Component {
     });
   }
 
-  closeToaster(e) {
-    var msgObj = this.state.errorMsgObj;
-      msgObj.alertIs = false;
-      this.setState({
-        errorMsgObj: msgObj
-      });
-  }
-
   render() {
-    let boxClass = ["toast", "cstm-toaster"];
-    if(this.state.errorMsgObj.alertIs) {
-      boxClass.push('showToast');
-      boxClass.push(this.state.errorMsgObj.alertClass);
-    }
     return (
     <div className="login-main-cont">
+      <div className={this.state.isLoader ? 'mainLoader show' : 'mainLoader'}>
+        <img src="https://i2.wp.com/swaggyimages.com/wp-content/uploads/2018/05/Indian-Flag-Pics-Free-Download.gif?w=640" alt="Loader" />
+      </div>
       <div className="login-main-box">
-        <h2><span>Cre</span><span>denti</span><span>als</span></h2>
+        <h2><span>Cre</span><span>dent</span><span>ials</span></h2>
         <div className="card login-box">
           <form onSubmit={this.loginSubmitFun.bind(this)}>
             <div className="form-group">
@@ -149,14 +148,7 @@ class Login extends Component {
           </form>
         </div>
       </div>
-      <div className={this.state.errorMsgObj.alertIs ? "toaster-bg showToast" : "toaster-bg"}></div>
-      <div className={boxClass.join(' ')} role="alert" aria-live="assertive" aria-atomic="true">
-        <div className="toast-header">
-          <strong className="mr-auto">{this.state.errorMsgObj.alertTitle}</strong>
-          <button type="button" className="close" data-dismiss="toast" aria-label="Close" onClick={this.closeToaster.bind(this)}><i className="fas fa-times"></i></button>
-        </div>
-        <div className="toast-body">{this.state.errorMsgObj.alertMsg}</div>
-      </div>
+      <ToasterBox obj={this.state.errorMsgObj} />
     </div>
     );
   }

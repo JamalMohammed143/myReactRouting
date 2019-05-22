@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import logo from "../img/logo.png";
+//import logo from "../img/logo.png";
 //import * as moment from "moment";
 import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import Header from '../components/Header';
+import ToasterBox from './ToasterBox';
 
 class Dashboard extends Component {
   constructor(props){
@@ -13,7 +15,7 @@ class Dashboard extends Component {
       resData: [],
       userData: {},
       getFirstObj: {},
-      isLoaded: true,
+      isLoader: true,
       errorMsgObj: {
         alertIs: false,
         alertTitle: "Error",
@@ -28,7 +30,8 @@ class Dashboard extends Component {
   componentDidMount() {
     var userData = JSON.parse(sessionStorage.getItem('userData'));
     this.setState({
-      userData: userData
+      userData: userData,
+      isLoader: true
     });
     var url = this.state.rootURL + 'getCandidates/' + userData.constituency;
     fetch(url).then(res => res.json()).then((result) => {
@@ -38,13 +41,19 @@ class Dashboard extends Component {
         element.activeClassIs = false;
       }
       this.setState({
-        isLoaded: false,
+        isLoader: false,
         resData: resultData,
         getFirstObj: result.result[0]
       });
     },(error) => {
+        var msgObj = this.state.errorMsgObj;
+        msgObj.alertIs = true;
+        msgObj.alertMsg = "Something went wrong...";
+        msgObj.alertTitle = "Error";
+        msgObj.alertClass = "error-msg";
         this.setState({
-          isLoaded: true
+          errorMsgObj: msgObj,
+          isLoader: false
         });
       }
     );
@@ -63,6 +72,9 @@ class Dashboard extends Component {
   }
   
   async voteSubmiting(e, params, index) {
+    this.setState({
+      isLoader: true
+    });
     var data = params;
     var allData = this.state.resData;
     var sendData = 'application/json.utf_' + data.adhaar_no + '/' + data.voter_id + '/' + data.constituency + '/' + data.candidateId;
@@ -83,7 +95,8 @@ class Dashboard extends Component {
     if(result.success) {
         allData[index].activeClassIs = true;
         this.setState({
-          resData: allData
+          resData: allData,
+          isLoader: false
         });
         $('#votedSuccessModal').modal('show');
       } else {
@@ -94,7 +107,8 @@ class Dashboard extends Component {
         msgObj.alertTitle = "Warning";
         msgObj.alertClass = "warning-msg";
         this.setState({
-          errorMsgObj: msgObj
+          errorMsgObj: msgObj,
+          isLoader: false
         });
     }
   }
@@ -114,38 +128,14 @@ class Dashboard extends Component {
     this.props.history.push('/Landing');
   }
 
-  closeToaster(e) {
-    var msgObj = this.state.errorMsgObj;
-      msgObj.alertIs = false;
-      this.setState({
-        errorMsgObj: msgObj
-      });
-  }
-
   render(){
-    let boxClass = ["toast", "cstm-toaster"];
-    if(this.state.errorMsgObj.alertIs) {
-      boxClass.push('showToast');
-      boxClass.push(this.state.errorMsgObj.alertClass);
-    }
     return (
       <div className="dashboard-cont">
-        <header>
-          <a href="/">
-            <img src={logo} alt="LOGO" />
-            <h2>Online Voting Portal</h2>
-          </a>
-          <div className="user-details" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span className="user-name">{this.state.userData.first_name + " " + this.state.userData.last_name}</span>
-            <span className="user-icon"><i className="fas fa-user"></i></span>
-          </div>
-          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a className="dropdown-item" href="/">Logout</a>
-          </div>
-        </header>
+        <Header />
         <div className="votingportal">
-          <div className="voting-place">Place: <strong>{this.state.getFirstObj.city || '--'}</strong></div>
-          <div className="innerbox">
+          <div className="main-box">
+            <div className="voting-place">Place: <strong>{this.state.getFirstObj.city || '--'}</strong></div>
+            <div className="innerbox">
             {this.state.resData.map((item, index) => (
                 <div className="member1" key={index}>
                     <div className="icon">
@@ -160,6 +150,7 @@ class Dashboard extends Component {
                     </div>
                 </div>
             ))}
+          </div>
           </div>
         </div>
         <div className="modal fade voted-success-modal" id="votedSuccessModal" tabIndex="-1" role="dialog" aria-labelledby="successModal"
@@ -178,14 +169,7 @@ class Dashboard extends Component {
             </div>
           </div>
         </div>
-        <div className={this.state.errorMsgObj.alertIs ? "toaster-bg showToast" : "toaster-bg"}></div>
-        <div className={boxClass.join(' ')} role="alert" aria-live="assertive" aria-atomic="true">
-          <div className="toast-header">
-            <strong className="mr-auto">{this.state.errorMsgObj.alertTitle}</strong>
-            <button type="button" className="close" data-dismiss="toast" aria-label="Close" onClick={this.closeToaster.bind(this)}><i className="fas fa-times"></i></button>
-          </div>
-          <div className="toast-body">{this.state.errorMsgObj.alertMsg}</div>
-        </div>
+        <ToasterBox obj={this.state.errorMsgObj} />
       </div>
     );
   }
