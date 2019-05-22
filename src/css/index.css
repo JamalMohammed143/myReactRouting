@@ -1,0 +1,309 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root,
+.main-element {
+  width: 100%;
+  height: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Dashboard css open */
+.dashboard-cont {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-success:not(:disabled):not(.disabled).active {
+  background: red;
+  border: 1px solid red;
+  box-Shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.5) !important;
+}
+
+header {
+  background: #1d3e5d;
+  display: flex;
+  box-shadow: 0px 0px 4px 1px grey;
+  color: white;
+  height: 60px;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 999;
+}
+
+header a:hover,
+header a {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
+header img {
+  max-width: 50px;
+  max-height: 50px;
+  margin: 0 5px;
+}
+
+header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.user-details {
+  cursor: pointer;
+  padding-right: 50px;
+  position: relative;
+  max-width: 30%;
+}
+
+.user-details .user-name {
+  display: inline-block;
+  font-size: 16px;
+  padding-right: 8px;
+  font-weight: 600;
+  vertical-align: middle;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+}
+
+.user-details .user-icon {
+  background-color: #888;
+  display: inline-block;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 40px;
+  font-size: 26px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
+.votingportal {
+  width: 100%;
+  overflow: auto;
+  max-height: 100%;
+}
+
+.voting-place {
+  color: darkgray;
+  width: 88%;
+  margin: 15px auto 5px;
+  font-size: 18px;
+}
+
+.innerbox {
+  width: 90%;
+  margin: 0 auto 15px;
+  border: 1px solid gray;
+  border-radius: 3px;
+  box-shadow: 0px 0px 3px 2px gainsboro;
+}
+
+.member1 {
+  box-shadow: 0px 0px 1px 1px #dddd;
+  padding-left: 75px;
+  padding-right: 80px;
+  position: relative;
+  margin: 10px;
+}
+
+.member1 .icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 60px;
+  text-align: center;
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
+.member1 .icon img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.member1 .partie {
+  padding: 10px;
+}
+
+.member1 .partie h5 {
+  color: #1d3d5d;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.party-person {
+  margin: 0;
+  padding-top: 2px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.member1 .voting {
+  text-align: center;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
+.nota {
+  font-size: 32px;
+  padding: 10px;
+}
+
+/* ---------------Success Modal Box------ */
+.voted-success-modal .modal-dialog {
+  max-width: 400px;
+}
+
+.voted-success-modal .modal-content {
+  padding: 10px;
+}
+
+.voted-success-modal .modal-body {
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.voted-success-modal .modal-body .check {
+  background-color: green;
+  border-radius: 49px;
+  color: white;
+  height: 60px;
+  width: 60px;
+  line-height: 60px;
+  font-size: 36px;
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+}
+
+.voted-success-modal .modal-body p {
+  margin: 0;
+  font-size: 20px;
+}
+
+.voted-success-modal .modal-footer {
+  justify-content: center;
+  border: none;
+  padding: 0;
+}
+
+/* -----------------End Success Modal--------- */
+
+@media (max-width: 768px) {
+  header {
+    height: 50px;
+  }
+
+  header img {
+    max-width: 40px;
+    max-height: 40px;
+    margin: 0 2px;
+  }
+
+  header h2 {
+    font-size: 18px;
+  }
+
+  .user-details {
+    max-width: 40%;
+  }
+
+  .user-details .user-icon {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 18px;
+    right: 5px;
+  }
+
+  .user-details .user-name {
+    font-size: 14px;
+    padding-right: 0;
+  }
+
+  .user-details {
+    padding-right: 45px;
+  }
+
+  .member1 {
+    margin: 5px;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .member1 .icon {
+    width: 60px;
+    height: 45px;
+  }
+
+  .member1 .partie {
+    padding: 5px;
+  }
+
+  .member1 .partie h5 {
+    font-size: 15px;
+  }
+
+  .member1 .voting {
+    right: 8px;
+  }
+
+  .member1 .voting .btn {
+    min-width: 50px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+/* Dashboard css close */

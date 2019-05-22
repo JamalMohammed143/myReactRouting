@@ -1,0 +1,188 @@
+.login-main-cont {
+    animation: bgChangingAni 5s ease-in-out infinite;
+    background-image: url(../img/Flag_of_India.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes bgChangingAni {
+
+    0%,
+    100% {
+        background-image: url(../img/goldenTemple.jpg);
+    }
+
+    25% {
+        background-image: url(../img/gatewayOfIndiaMumbai.jpg);
+    }
+
+    50% {
+        background-image: url(../img/tajMahal.jpg);
+    }
+
+    75% {
+        background-image: url(../img/redFortDelhi.jpg);
+    }
+}
+
+.login-main-cont::before {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+.login-main-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    position: absolute;
+    min-width: 450px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    padding: 5px;
+    z-index: 1;
+}
+
+.login-main-box h2 {
+    color: #ffffff;
+    text-align: center;
+}
+
+.login-main-box h2 span:first-child {
+    color: #ff9933;
+}
+
+.login-main-box h2 span:last-child {
+    color: #118808;
+}
+
+.card.login-box {
+    background-color: transparent;
+    color: #000088;
+    padding: 12px;
+    border: 0;
+}
+
+.login-box .form-control {
+    border: 1px solid #000088;
+    border-radius: 0;
+    font-size: 16px;
+}
+
+.login-box .form-group label {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.form-btn {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.form-btn .btn {
+    border-radius: 0;
+    width: 100%;
+}
+
+.btn-success {
+    background-color: #118808;
+}
+
+/* Toaster Msg css open */
+.toaster-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.toaster-bg.showToast {
+    display: block;
+}
+
+.toast.cstm-toaster {
+    background-color: #fff;
+    border-width: 3px;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.8);
+    color: #6c757d;
+    position: fixed;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -100%);
+    -webkit-transform: translate(-50%, -100%);
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    min-width: 300px;
+    z-index: 1001;
+}
+
+.toast.cstm-toaster.showToast {
+    transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    top: 100px;
+    opacity: 1;
+}
+
+.cstm-toaster .toast-header {
+    justify-content: space-between;
+}
+
+.cstm-toaster button.close {
+    font-size: 16px;
+    float: none;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    line-height: 25px;
+    margin-right: -8px;
+}
+
+.cstm-toaster .toast-body {
+    padding: 15px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.toast.cstm-toaster.danger-msg {
+    border-color: #dc3545;
+}
+
+.cstm-toaster.danger-msg .toast-header {
+    color: #dc3545;
+}
+
+.toast.cstm-toaster.warning-msg {
+    border-color: #ffc107;
+}
+
+.cstm-toaster.warning-msg .toast-header {
+    color: #ffc107;
+}
+
+.toast.cstm-toaster.success-msg {
+    border-color: #28a745;
+}
+
+.cstm-toaster.success-msg .toast-header {
+    color: #28a745;
+}
+
+@media (max-width: 768px) {
+    .login-main-box {
+        min-width: 90%;
+    }
+}
